@@ -13,6 +13,35 @@
 
 class Solution:
     def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        dummy = ListNode(0)
+        out = dummy # for output
+        
+        while True:
+            stack = []
+            count = k
+            curr = head
+            
+            while count > 0 and curr:
+                stack.append(curr)
+                curr = curr.next
+                count -= 1
+            
+            # 剩下的不够k个：正常顺序
+            if count > 0: 
+                dummy.next = head
+                break
+
+            while stack:
+                dummy.next = stack.pop()
+                dummy = dummy.next
+            
+            # dummy.next = curr
+            head = curr
+            
+
+        return out.next
+            
+
         
 # @lc code=end
 
