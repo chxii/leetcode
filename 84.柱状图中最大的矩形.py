@@ -7,18 +7,28 @@
 # @lc code=start
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
-        if (len(heights)==0):
-            return 0
-        left = 0
-        right = len(heights) - 1
-        maxArea = 0
-        while left < right:
-            maxArea = max(maxArea, (right-left+1)*min(heights[left:right+1]))
-            if heights[left] < heights[right]:
-                left += 1
-            else:
-                right -= 1
-        return maxArea
+        # maxArea = 0
+        # for i in range(len(heights)):
+        #     left = i-1
+        #     while left >= 0 and heights[left] >= heights[i]:
+        #         left -= 1
+        #     right = i+1
+        #     while right < len(heights) and heights[right] >= heights[i]:
+        #         right += 1
+        #     width = right - left - 1
+        #     currArea = width * heights[i]
+        #     maxArea = max(maxArea, currArea)
+        # return maxArea
+
+        stack = []
+        heights = [0] + heights + [0]
+        res = 0
+        for i in range(len(heights)): 
+            while stack and heights[stack[-1]] > heights[i]:               
+                tmp = stack.pop()
+                res = max(res, (i - stack[-1] - 1) * heights[tmp])
+            stack.append(i)
+        return res
         
         
 # @lc code=end
