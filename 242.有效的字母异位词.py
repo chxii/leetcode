@@ -22,6 +22,9 @@ class Solution:
             if tmp[d] != 0:
                 return False
         return True
+
+        ## 排序的解法：
+        # return len(s) == len(t) and sorted(s) == sorted(t)
                 
         
 # @lc code=end
